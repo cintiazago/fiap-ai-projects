@@ -10,19 +10,24 @@ textos = [
     "Eleições presidenciais",
     "Atualização no mundo da tecnologia",
     "Campeonato de futebol",
-    "Política internacional"
+    "Política internacional",
+    "Novo smartphone da Samsung",
+    "Final do campeonato de tênis",
+    "Reunião de cúpula sobre mudanças climáticas",
+    "Rumores sobre novo console de videogame"
 ]
-categorias = ["tecnologia", "esportes", "política", "tecnologia", "esportes", "política"]
+categorias = ["tecnologia", "esportes", "política", "tecnologia", "esportes", "política",
+              "tecnologia", "esportes", "política", "tecnologia"]
 
 # Convertendo textos em uma matriz de contagens de tokens
 vectorizer = CountVectorizer()
 X = vectorizer.fit_transform(textos)
 
 # Dividindo os dados em conjuntos de treinamento e teste
-X_train, X_test, y_train, y_test = train_test_split(X, categorias, test_size=0.5, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, categorias, test_size=0.3, random_state=42)
 
 # Treinando o classificador
-clf = MultinomialNB()
+clf = MultinomialNB(alpha=0.1)  # Adicionando um pequeno valor de alfa para suavização de Laplace
 clf.fit(X_train, y_train)
 
 # Predição e Avaliação
